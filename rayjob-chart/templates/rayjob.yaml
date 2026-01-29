@@ -1,0 +1,25 @@
+apiVersion: ray.io/v1
+kind: RayJob
+metadata:
+  name: "{{ .Values.rayjob.name }}"
+  namespace: "{{ .Values.rayjob.namespace }}"
+spec:
+  entrypoint: python -c "import ray; ray.init(); print('Hello World')"
+  rayClusterSpec:
+    rayVersion: "2.9.0"
+    headGroupSpec:
+      rayStartParams: {}
+      template:
+        spec:
+          containers:
+            - name: ray-head
+              image: rayproject/ray:2.9.0
+    workerGroupSpecs:
+      - replicas: 1
+        groupName: workergroup
+        rayStartParams: {}
+        template:
+          spec:
+            containers:
+              - name: ray-worker
+                image: rayproject/ray:2.9.0
