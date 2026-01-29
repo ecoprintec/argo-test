@@ -6,14 +6,14 @@ metadata:
 spec:
   entrypoint: python -c "import ray; ray.init(); print('Hello World')"
   rayClusterSpec:
-    rayVersion: "2.9.0"
+    rayVersion: "{{ default .Chart.AppVersion .Values.image.tag }}"
     headGroupSpec:
       rayStartParams: {}
       template:
         spec:
           containers:
             - name: ray-head
-              image: rayproject/ray:2.9.0
+              image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
     workerGroupSpecs:
       - replicas: 1
         groupName: workergroup
@@ -22,4 +22,4 @@ spec:
           spec:
             containers:
               - name: ray-worker
-                image: rayproject/ray:2.9.0
+                image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"

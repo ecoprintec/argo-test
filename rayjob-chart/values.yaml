@@ -1,3 +1,6 @@
+image:
+  repository: rayproject/ray
+  tag: ""
 rayjob:
   name: rayjob-test
   namespace: ddp

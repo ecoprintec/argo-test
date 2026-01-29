@@ -1,4 +1,4 @@
 apiVersion: v1
 name: rayjob-chart
 description: A Helm Chart for XXX application on Kubernetes
-version: "1.0.0"
+version: "2.46.0"
