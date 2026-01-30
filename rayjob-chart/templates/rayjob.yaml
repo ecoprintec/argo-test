@@ -5,6 +5,7 @@ metadata:
   namespace: "{{ .Values.rayjob.namespace }}"
 spec:
   entrypoint: python -c "import ray; ray.init(); print('Hello World')"
+  shutdownAfterJobFinishes: true
   rayClusterSpec:
     rayVersion: "{{ default .Chart.AppVersion .Values.image.tag }}"
     headGroupSpec:
